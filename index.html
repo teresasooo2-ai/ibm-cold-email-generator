@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBM Sales Cadence Engine - AI-Powered Prospecting</title>
+    <link rel="stylesheet" href="css/ibm-theme.css">
+    <link rel="stylesheet" href="css/cadence-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" fill="#0F62FE" />
+                    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="24"
+                        font-weight="bold" font-family="IBM Plex Sans, sans-serif">IBM</text>
+                </svg>
+            </div>
+            <h1>IBM Sales Cadence Engine</h1>
+            <p class="subtitle">AI-Powered Problem → Product → Cadence Mapping</p>
+        </header>
+
+        <!-- Progress Indicator -->
+        <div class="progress-bar" id="progressBar">
+            <div class="progress-step active" data-step="1">
+                <div class="step-number">1</div>
+                <div class="step-label">Account Discovery</div>
+            </div>
+            <div class="progress-step" data-step="2">
+                <div class="step-number">2</div>
+                <div class="step-label">Intelligence</div>
+            </div>
+            <div class="progress-step" data-step="3">
+                <div class="step-number">3</div>
+                <div class="step-label">Problem Selection</div>
+            </div>
+            <div class="progress-step" data-step="4">
+                <div class="step-number">4</div>
+                <div class="step-label">Buying Committee</div>
+            </div>
+            <div class="progress-step" data-step="5">
+                <div class="step-number">5</div>
+                <div class="step-label">Cadence</div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Screen 1: Account Discovery -->
+            <section id="screen1" class="screen active">
+                <div class="card">
+                    <h2>Account Discovery</h2>
+                    <p class="section-description">Enter target companies and select your IBM practice area</p>
+
+                    <div class="form-group">
+                        <label for="companyInput">Company List *</label>
+                        <textarea id="companyInput" rows="4"
+                            placeholder="Enter companies (one per line or comma-separated)&#10;Example:&#10;Chipotle&#10;Chevron&#10;HCA Healthcare&#10;Target"></textarea>
+                        <span class="helper-text">Single company, paste multiple, or upload CSV</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="practiceArea">IBM Practice Area *</label>
+                        <select id="practiceArea">
+                            <option value="">Select practice area...</option>
+                            <option value="ai">AI</option>
+                            <option value="data">Data</option>
+                            <option value="automation">Automation</option>
+                            <option value="integration">Integration</option>
+                            <option value="security">Security</option>
+                            <option value="tls">Technology Lifecycle Services</option>
+                            <option value="hybrid_cloud">Hybrid Cloud</option>
+                            <option value="business_mgmt">Business Management</option>
+                            <option value="sustainability">Sustainability</option>
+                            <option value="storage">Storage</option>
+                            <option value="infrastructure">Infrastructure</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="industrySelect">Industry (Optional)</label>
+                        <select id="industrySelect">
+                            <option value="">Auto-detect from company...</option>
+                            <option value="food">Food & Beverage</option>
+                            <option value="retail">Retail & E-commerce</option>
+                            <option value="financial">Financial Services & Banking</option>
+                            <option value="healthcare">Healthcare & Life Sciences</option>
+                            <option value="manufacturing">Manufacturing & Industrial</option>
+                            <option value="energy">Energy & Utilities</option>
+                            <option value="telecommunications">Telecommunications</option>
+                            <option value="transportation">Transportation & Logistics</option>
+                            <option value="government">Government & Public Sector</option>
+                            <option value="insurance">Insurance</option>
+                            <option value="automotive">Automotive</option>
+                            <option value="pharma">Pharmaceutical & Biotech</option>
+                        </select>
+                    </div>
+
+                    <button id="researchBtn" class="btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2" />
+                            <path d="M13 13L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                        Research Accounts
+                    </button>
+
+                    <div id="errorMessage" class="error-message" style="display: none;"></div>
+                </div>
+            </section>
+
+            <!-- Screen 2: Account Intelligence -->
+            <section id="screen2" class="screen">
+                <div class="card">
+                    <h2>Account Intelligence</h2>
+                    <div id="accountIntelligence"></div>
+                </div>
+            </section>
+
+            <!-- Screen 3: Problem Selection -->
+            <section id="screen3" class="screen">
+                <div class="card">
+                    <h2>Select Primary Problem</h2>
+                    <p class="section-description">Choose the business problem to focus your outreach on</p>
+                    <div id="problemSelection"></div>
+                </div>
+            </section>
+
+            <!-- Screen 4: Buying Committee -->
+            <section id="screen4" class="screen">
+                <div class="card">
+                    <h2>Buying Committee</h2>
+                    <p class="section-description">Select personas and communication style</p>
+                    <div id="buyingCommittee"></div>
+
+                    <div class="persona-selection">
+                        <h3>Select Target Personas</h3>
+                        <p class="helper-text">Select one or more personas to target (generates tailored messaging for
+                            each)</p>
+                        <div id="personaList"></div>
+                    </div>
+
+                    <div class="communication-style-section" style="margin-top: 32px;">
+                        <h3>Communication Style</h3>
+                        <div id="cultureSuggestion" class="culture-suggestion" style="margin-bottom: 16px;"></div>
+                        <div class="style-selector" id="styleSelector"></div>
+                    </div>
+
+                    <button id="generateCadenceBtn" class="btn-primary" style="margin-top: 24px;">
+                        Generate Sales Cadence
+                    </button>
+                </div>
+            </section>
+
+            <!-- Screen 5: Cadence Output -->
+            <section id="screen5" class="screen">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Sales Cadence Generated</h2>
+                        <div class="card-actions">
+                            <button id="startOverBtn" class="btn-secondary">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M4 10C4 6.68629 6.68629 4 10 4C13.3137 4 16 6.68629 16 10C16 13.3137 13.3137 16 10 16"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                                    <path d="M4 10L2 8M4 10L6 8" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                Start Over
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="cadenceTimeline"></div>
+
+                    <div class="export-section"
+                        style="margin-top: 32px; padding: 24px; background: var(--ibm-gray-10); border-radius: 8px;">
+                        <h3 style="margin-bottom: 16px;">Export to CRM</h3>
+                        <p class="helper-text" style="margin-bottom: 16px;">All emails include personalization variables
+                            ({{first_name}}, {{company}}, etc.) for direct import</p>
+
+                        <div class="export-buttons" style="display: flex; flex-wrap: wrap; gap: 12px;">
+                            <button id="exportOutreachBtn" class="btn-secondary">
+                                📤 Export to Outreach
+                            </button>
+                            <button id="exportSalesloftBtn" class="btn-secondary">
+                                📤 Export to Salesloft
+                            </button>
+                            <button id="exportApolloBtn" class="btn-secondary">
+                                📤 Export to Apollo
+                            </button>
+                            <button id="exportHubSpotBtn" class="btn-secondary">
+                                📤 Export to HubSpot
+                            </button>
+                            <button id="exportSalesforceBtn" class="btn-secondary">
+                                📤 Export to Salesforce
+                            </button>
+                            <button id="exportCSVBtn" class="btn-secondary">
+                                📊 Export CSV
+                            </button>
+                            <button id="copyCadenceBtn" class="btn-secondary">
+                                📋 Copy Cadence
+                            </button>
+                        </div>
+
+                        <div id="variableGuide"
+                            style="margin-top: 24px; padding: 16px; background: white; border-radius: 4px; border-left: 4px solid var(--ibm-blue-60);">
+                            <h4 style="margin-bottom: 12px;">Personalization Variables</h4>
+                            <div
+                                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; font-size: 13px;">
+                                <div><code>{{first_name}}</code> - Contact first name</div>
+                                <div><code>{{last_name}}</code> - Contact last name</div>
+                                <div><code>{{title}}</code> - Job title</div>
+                                <div><code>{{company}}</code> - Company name</div>
+                                <div><code>{{industry}}</code> - Industry sector</div>
+                                <div><code>{{state}}</code> - State/region</div>
+                                <div><code>{{problem}}</code> - Business problem</div>
+                                <div><code>{{ibm_product}}</code> - IBM solution</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 IBM Sales Cadence Engine. Built for IBM Sales Teams.</p>
+            <p class="footer-note">AI-powered prospecting tool. Always review and personalize before sending.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/industries.js"></script>
+    <script src="js/problemSolutionMapping.js"></script>
+    <script src="js/personaIntelligence.js"></script>
+    <script src="js/personalizationEngine.js"></script>
+    <script src="js/cadenceGenerator.js"></script>
+    <script src="js/whyChangeNarrative.js"></script>
+    <script src="js/b2bProspectingEngine.js"></script>
+    <script src="js/ibmProductCatalog.js"></script>
+    <script src="js/narrativeEvaluator.js"></script>
+    <script src="js/searchService.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
