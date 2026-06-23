@@ -144,8 +144,8 @@ class SalesCadenceApp {
         // Generate intelligence for each company
         const companyIntelligence = companies.map(company => {
             const industry = this.appState.industry || this.detectIndustry(company);
-            const problems = window.ProblemSolutionMap.getProblemsByIndustry(industry);
-            const opportunityScore = this.calculateOverallScore(problems, industry);
+            const problems = window.ProblemSolutionMap.getProblemsByIndustry(industry, company);
+            const opportunityScore = this.calculateOverallScore(problems, industry, company);
             const topProblem = problems[0];
 
             return {
@@ -172,11 +172,11 @@ class SalesCadenceApp {
         const company = this.appState.selectedCompany;
         const industry = this.appState.industry || this.detectIndustry(company);
 
-        // Get problems for industry
-        const problems = window.ProblemSolutionMap.getProblemsByIndustry(industry);
+        // Get problems for industry with company-specific customization
+        const problems = window.ProblemSolutionMap.getProblemsByIndustry(industry, company);
 
         // Calculate opportunity score
-        const opportunityScore = this.calculateOverallScore(problems, industry);
+        const opportunityScore = this.calculateOverallScore(problems, industry, company);
 
         this.appState.accountIntelligence = {
             company,
@@ -207,11 +207,11 @@ class SalesCadenceApp {
         return 'retail'; // Default
     }
 
-    calculateOverallScore(problems, industry) {
+    calculateOverallScore(problems, industry, company = '') {
         if (problems.length === 0) return 50;
 
         const avgScore = problems.reduce((sum, p) => {
-            return sum + window.ProblemSolutionMap.calculateOpportunityScore('', industry, p.id);
+            return sum + window.ProblemSolutionMap.calculateOpportunityScore(company, industry, p.id);
         }, 0) / problems.length;
 
         return Math.round(avgScore);
